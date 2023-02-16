@@ -3,7 +3,7 @@ import 'dart:io';
 //function to perform Addition logic
 void add() {
   print('You chose Addition');
-  print('''Enter your numbers
+  print('''Enter two numbers
 type "end" at last to stop\n''');
 
   String num;
@@ -44,7 +44,7 @@ type "end" at last to stop\n''');
 //function to perform subraction logic
 void subtract() {
   print('You chose Subtraction');
-  print('''Enter your numbers
+  print('''Enter two numbers
 type "end" at last to stop\n''');
 
   String num;
@@ -64,23 +64,13 @@ type "end" at last to stop\n''');
 
 //check if entered number is double or integer
   if (enteredNumbers.any((element) => element.toString().contains('.'))) {
-    late double total;
-    double initVal = double.parse(enteredNumbers[0]);
-    for (var i = 0; i < enteredNumbers.length; i++) {
-      //convert each number in list to double
-      total = initVal +
-          (double.parse(enteredNumbers[i]) - double.parse(enteredNumbers[0]));
-    }
+    double total =
+        double.parse(enteredNumbers[0]) - double.parse(enteredNumbers[1]);
+
     print(enteredNumbers);
     print('Answer is: $total');
   } else {
-    late int total;
-    int initVal = int.parse(enteredNumbers[0]);
-    for (var i = 0; i < enteredNumbers.length; i++) {
-      //convert each number in list to int
-      total = initVal +
-          (int.parse(enteredNumbers[i]) - int.parse(enteredNumbers[0]));
-    }
+    int total = int.parse(enteredNumbers[0]) - int.parse(enteredNumbers[1]);
     print(enteredNumbers);
     print('Answer is: $total');
   }
@@ -89,7 +79,7 @@ type "end" at last to stop\n''');
 //function to perform multiplication logic
 void multiply() {
   print('You chose Multiplication');
-  print('''Enter your numbers
+  print('''Enter two numbers
 type "end" at last to stop\n''');
 
   String num;
@@ -130,7 +120,7 @@ type "end" at last to stop\n''');
 //function to do division logic
 void divide() {
   print('You chose Division');
-  print('''Enter your numbers
+  print('''Enter two numbers
 type "end" at last to stop\n''');
 
   String num;
@@ -150,60 +140,54 @@ type "end" at last to stop\n''');
 
 //check if entered number is double or integer
   if (enteredNumbers.any((element) => element.toString().contains('.'))) {
-    late double total;
-    double initVal = double.parse(enteredNumbers[0]);
-    for (var i = 0; i < enteredNumbers.length; i++) {
-      //convert each number in list to double
-      total = (initVal / double.parse(enteredNumbers[i])) *
-          double.parse(enteredNumbers[i]);
-    }
+    double result =
+        double.parse(enteredNumbers[0]) / double.parse(enteredNumbers[1]);
     print(enteredNumbers);
-    print('Answer is: $total');
+    print('Answer is: $result');
   } else {
-    late double total;
-    double initVal = double.parse(enteredNumbers[0]);
-    for (var i = 0; i < enteredNumbers.length; i++) {
-      //convert each number in list to double
-      total = (initVal / double.parse(enteredNumbers[i])) /
-          (initVal * double.parse(enteredNumbers[i]) / initVal);
-    }
+    var result = (int.parse(enteredNumbers[0]) / int.parse(enteredNumbers[1]));
+
     print(enteredNumbers);
-    print('Answer is: $total');
+    print('Answer is: $result');
   }
 }
 
 void main(List<String> args) {
-  //prompt user with welcome message and menu
-  print('WELCOME TO THE DART CALULATOR \n');
-  print('Please choose an arithmatic operation to do.\n');
-  print('''
+  late var proceed;
+  do {
+    //prompt user with welcome message and menu
+    print('WELCOME TO THE DART CALULATOR \n');
+    print('Please choose an arithmatic operation to do.\n');
+    print('''
   1.Addition
   2.Subtraction
   3.Multiplication
   4.Division''');
 
-  //prompt user and read input
-  print('Enter Your Choice (1-5)');
-  String selected = stdin.readLineSync().toString();
+    //prompt user and read input
+    print('Enter Your Choice (1-5)');
+    String selected = stdin.readLineSync().toString();
 
-  //convert input to integer
-  int choice = int.parse(selected);
-
-  //iterate through the options
-  switch (choice) {
-    case 1:
-      add();
-      break;
-    case 2:
-      subtract();
-      break;
-    case 3:
-      multiply();
-      break;
-    case 4:
-      divide();
-      break;
-    default:
-      print('Your choice is not available');
-  }
+    //convert input to integer
+    int choice = int.parse(selected);
+    //iterate through the options
+    switch (choice) {
+      case 1:
+        add();
+        break;
+      case 2:
+        subtract();
+        break;
+      case 3:
+        multiply();
+        break;
+      case 4:
+        divide();
+        break;
+      default:
+        print('Your choice is not available');
+    }
+    print('Do you wish to continue use the Dart Calculator?(yes/no)');
+    proceed = stdin.readLineSync();
+  } while (proceed.toString().contains('yes'));
 }
